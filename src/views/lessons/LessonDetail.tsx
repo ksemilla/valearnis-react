@@ -3,9 +3,12 @@ import { useNavigate, useParams } from "react-router-dom"
 import { LessonsService } from "../../api/lessons"
 import {
   Box,
+  Button,
   Card,
   CardBody,
   Center,
+  Divider,
+  Flex,
   Heading,
   Image,
   Stack,
@@ -40,39 +43,49 @@ export default function LessonPublicDetail() {
     <Loader text="Fetching Lesson" />
   ) : (
     <Box maxW="600px" m="auto">
-      <Center mb="10px">
+      <Flex mb="40px" justify="space-between">
         <Box>
           <Heading>{data?.name}</Heading>
           <Text fontWeight={500}>{data?.subtitle}</Text>
         </Box>
-      </Center>
+        {data?.quizzes.length !== 0 && (
+          <Box>
+            <Button as="a" href="#quizzes">
+              View quizzes
+            </Button>
+          </Box>
+        )}
+      </Flex>
       <Stack spacing={5}>
         {data?.lesson_elements.map((l) => (
           <LessonElementInline key={l.id} lessonElement={l} />
         ))}
       </Stack>
       {data?.quizzes.length !== 0 && (
-        <Center my="20px">
-          <Stack spacing={5} w="100%">
-            <Center>
-              <Heading fontSize="3xl">Take a quiz</Heading>
-            </Center>
-            <Stack>
-              {data?.quizzes.map((q) => (
-                <Card
-                  key={q.id}
-                  onClick={() => navigate(`${q.id}`)}
-                  cursor="pointer"
-                  _hover={{ backgroundColor: "gray.50" }}
-                >
-                  <CardBody>
-                    <Heading size="lg">{q.name}</Heading>
-                  </CardBody>
-                </Card>
-              ))}
+        <>
+          <Divider my="30px" />
+          <Center my="20px" id="quizzes">
+            <Stack spacing={5} w="100%">
+              <Center>
+                <Heading fontSize="3xl">Take a quiz</Heading>
+              </Center>
+              <Stack>
+                {data?.quizzes.map((q) => (
+                  <Card
+                    key={q.id}
+                    onClick={() => navigate(`${q.id}`)}
+                    cursor="pointer"
+                    _hover={{ backgroundColor: "gray.50" }}
+                  >
+                    <CardBody>
+                      <Heading size="lg">{q.name}</Heading>
+                    </CardBody>
+                  </Card>
+                ))}
+              </Stack>
             </Stack>
-          </Stack>
-        </Center>
+          </Center>
+        </>
       )}
     </Box>
   )
