@@ -3,14 +3,24 @@ import { AxiosRequestConfig, AxiosResponse } from "axios"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { ApiService } from "../../api/BaseService"
+import { JsonView, defaultStyles } from "react-json-view-lite"
+import "react-json-view-lite/dist/index.css"
 
-const token =
+const adminToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.jWZVxYKD4dg9P8UHk6_TfbiNbMwhx-spi0ooDf0lTvc"
+const userToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMH0.jzQFIVkQbIomdoyniLuJHHsQAGxaqbn0qbE9kv8f7XY"
+
+// const adminToken =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.MYpIw7_Rjj1jNwSGS4brp0oFVXCBYVfUT-pIvUqIm9M"
+// const userToken =
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyfQ.gHO35TGi4qWYaygCEz-A7edC8dsjW-Z-IKa0whst3y0"
+const dummyToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozfQ.XlBbYBYfERrZyjFCXSYIvzxveKVtaGiQLdoq9iS53GI"
 
 const items: {
   label: string
   description: string
-  res: boolean
   func: (
     path: string,
     data: any,
@@ -21,9 +31,8 @@ const items: {
   config?: any
 }[] = [
   {
-    label: "Login Success - Admin",
+    label: "Login Admin: Success",
     description: "Api will respond with access token",
-    res: true,
     func: ApiService.post,
     data: {
       email: "admin@admin.com",
@@ -33,9 +42,8 @@ const items: {
     config: {},
   },
   {
-    label: "Login Success - User",
+    label: "Login User: Success",
     description: "Api will respond with access token",
-    res: true,
     func: ApiService.post,
     data: {
       email: "test@test.com",
@@ -45,9 +53,8 @@ const items: {
     config: {},
   },
   {
-    label: "Login Fail 1",
+    label: "Login Wrong Password: Fail",
     description: "Wrong password",
-    res: true,
     func: ApiService.post,
     data: {
       email: "admin@admin.com",
@@ -57,9 +64,8 @@ const items: {
     config: {},
   },
   {
-    label: "Login Fail 2",
+    label: "Login Wrong Email: Fail",
     description: "Wrong email",
-    res: true,
     func: ApiService.post,
     data: {
       email: "admin1@admin.com",
@@ -69,17 +75,153 @@ const items: {
     config: {},
   },
   {
-    label: "View lesson list Success",
-    description: "Wrong email",
-    res: true,
+    label: "View lesson list: Success",
+    description: "List of lessons",
     func: ApiService.get,
-    data: {},
-    path: `lessons/`,
-    config: {
+    data: {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${userToken}`,
       },
     },
+    path: `lessons/`,
+  },
+  {
+    label: "Unauthorized View lesson list: Fail",
+    description: "Wrong token",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken + "x"}`,
+      },
+    },
+    path: `lessons/`,
+  },
+  {
+    label: "View a lesson: Success",
+    description: "Get lesson detail",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `lessons/testaasd/`,
+  },
+  {
+    label: "View lesson's quizzes as admin: Success",
+    description: "Get quizzes related to lesson",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+      },
+    },
+    path: `lessons/testaasd/quizzes/`,
+  },
+  {
+    label: "View lesson's quizzes as user: Fail",
+    description: "This endpoint shows the correct answer. Only admins can view",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `lessons/testaasd/quizzes/`,
+  },
+  {
+    label: "Submit a quiz: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.post,
+    data: {
+      quiz_items: [
+        {
+          question: { id: 28, text: "test", type: "mmc" },
+          answers: [{ id: 78, text: "test" }],
+        },
+      ],
+    },
+    path: `lessons/testaasd/quizzes/9/submit/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${dummyToken}`,
+      },
+    },
+  },
+  {
+    label: "Submit a quiz: Fail",
+    description:
+      "Submit answers to quiz but one of the questions doesn't have an answer",
+    func: ApiService.post,
+    data: {
+      quiz_items: [
+        {
+          question: { id: 28, text: "test", type: "mmc" },
+          answers: [],
+        },
+      ],
+    },
+    path: `lessons/testaasd/quizzes/9/submit/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${dummyToken}`,
+      },
+    },
+  },
+  {
+    label: "View quiz result list: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `users/4/quiz-answers/`,
+  },
+  {
+    label: "View a quiz result: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `quiz-answers/114/`,
+  },
+  {
+    label: "Get user stats: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `users/4/stats/`,
+  },
+  {
+    label: "Get user list as admin: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+      },
+    },
+    path: `users`,
+  },
+  {
+    label: "Get user list as user: Fail",
+    description: "Submit answers to quiz",
+    func: ApiService.get,
+    data: {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
+    },
+    path: `users`,
   },
 ]
 export default function ApiTesting() {
@@ -143,9 +285,14 @@ export default function ApiTesting() {
                 gap={1}
               >
                 <Text>Data sent</Text>
-                <Text>{dataDesc}</Text>
+                <Text>Description: {dataDesc}</Text>
                 <Box flex="1" overflow="scroll">
-                  <pre>{JSON.stringify(data, null, 2)}</pre>
+                  {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+                  <JsonView
+                    data={data}
+                    shouldExpandNode={(level) => level < 5}
+                    style={defaultStyles}
+                  />
                 </Box>
               </Flex>
               <Flex flex="1" p="10px" direction="column" maxH="50%" gap={1}>
@@ -161,10 +308,20 @@ export default function ApiTesting() {
                   {!viewRawResponse ? (
                     <Box>
                       <Text>Status Code: {statusCode}</Text>
-                      <pre>{JSON.stringify(response, null, 2)}</pre>
+                      {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
+                      <JsonView
+                        data={response}
+                        shouldExpandNode={(level) => level < 3}
+                        style={defaultStyles}
+                      />
                     </Box>
                   ) : (
-                    <pre>{JSON.stringify(detail, null, 2)}</pre>
+                    // <pre>{JSON.stringify(detail, null, 2)}</pre>
+                    <JsonView
+                      data={detail}
+                      shouldExpandNode={(level) => level < 3}
+                      style={defaultStyles}
+                    />
                   )}
                 </Box>
               </Flex>
