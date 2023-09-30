@@ -190,7 +190,7 @@ const items: {
         Authorization: `Bearer ${adminToken}`,
       },
     },
-    path: `users`,
+    path: `users/`,
   },
   {
     label: "Get user list as user: Fail",
@@ -201,7 +201,7 @@ const items: {
         Authorization: `Bearer ${userToken}`,
       },
     },
-    path: `users`,
+    path: `users/`,
   },
   {
     label: "Submit a quiz 1: Fail",
