@@ -6,15 +6,15 @@ import { ApiService } from "../../api/BaseService"
 import { JsonView, defaultStyles } from "react-json-view-lite"
 import "react-json-view-lite/dist/index.css"
 
-const adminToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.jWZVxYKD4dg9P8UHk6_TfbiNbMwhx-spi0ooDf0lTvc"
-const userToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMH0.jzQFIVkQbIomdoyniLuJHHsQAGxaqbn0qbE9kv8f7XY"
-
 // const adminToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.MYpIw7_Rjj1jNwSGS4brp0oFVXCBYVfUT-pIvUqIm9M"
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.jWZVxYKD4dg9P8UHk6_TfbiNbMwhx-spi0ooDf0lTvc"
 // const userToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyfQ.gHO35TGi4qWYaygCEz-A7edC8dsjW-Z-IKa0whst3y0"
+//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMH0.jzQFIVkQbIomdoyniLuJHHsQAGxaqbn0qbE9kv8f7XY"
+
+const adminToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.MYpIw7_Rjj1jNwSGS4brp0oFVXCBYVfUT-pIvUqIm9M"
+const userToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyfQ.gHO35TGi4qWYaygCEz-A7edC8dsjW-Z-IKa0whst3y0"
 const dummyToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozfQ.XlBbYBYfERrZyjFCXSYIvzxveKVtaGiQLdoq9iS53GI"
 
