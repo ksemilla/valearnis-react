@@ -21,9 +21,11 @@ function LessonElementInline(props: { lessonElement: LessonElement }) {
   return (
     <Center>
       {props.lessonElement.type === "text" ? (
-        <Text>{props.lessonElement.text}</Text>
+        <Text fontWeight={500} fontSize="lg">
+          {props.lessonElement.text}
+        </Text>
       ) : (
-        <Image src={props.lessonElement.img_url} h="300px" />
+        <Image src={props.lessonElement.img_url} w="500px" />
       )}
     </Center>
   )
