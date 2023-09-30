@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react"
 import { IconShield, IconUsers } from "@tabler/icons-react"
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../stores/auth"
 import { UserRole } from "../types"
 import { useEffect } from "react"
@@ -34,6 +34,7 @@ const navigation: { label: string; path: string; icon: React.ReactNode }[] = [
 export default function AdminContainer() {
   const navigate = useNavigate()
   const authStore = useAuthStore()
+  const path = useLocation().pathname
 
   useEffect(() => {
     if (authStore.user && authStore.user.role !== UserRole.ADMIN) navigate("/")
@@ -92,6 +93,7 @@ export default function AdminContainer() {
           w="200px"
           p="10px"
           borderRight="1px"
+          borderColor="teal.600"
           position="fixed"
           bottom="0"
           top="68px"
@@ -103,8 +105,9 @@ export default function AdminContainer() {
               to={n.path}
               key={n.path}
               _hover={{
-                backgroundColor: "gray.100",
+                backgroundColor: "gray.300",
               }}
+              backgroundColor={path === n.path ? "gray.200" : ""}
               p="10px"
               borderRadius="md"
             >
