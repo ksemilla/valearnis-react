@@ -168,7 +168,7 @@ const items: {
         Authorization: `Bearer ${userToken}`,
       },
     },
-    path: `quiz-answers/114/`,
+    path: `quiz-answers/4/`,
   },
   {
     label: "Get user stats: Success",
@@ -179,7 +179,7 @@ const items: {
         Authorization: `Bearer ${userToken}`,
       },
     },
-    path: `users/4/stats/`,
+    path: `users/1/stats/`,
   },
   {
     label: "Get user list as admin: Success",
@@ -292,6 +292,7 @@ export default function ApiTesting() {
                         setDetail(res)
                       })
                       .catch((res) => {
+                        console.log(res)
                         setResponse(res.response.data)
                         setDetail(res.response)
                         setStatusCode(res.response.status)
