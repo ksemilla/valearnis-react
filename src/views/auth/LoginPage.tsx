@@ -92,6 +92,11 @@ export default function LoginPage() {
           </Button>
         </HStack>
       </Center>
+      <Center mt="10px">
+        <Button as={Link} to="/api-testing">
+          Go to api testing
+        </Button>
+      </Center>
     </Box>
   )
 }

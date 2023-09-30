@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import SignupForm from "./SignupForm"
 import {
   Box,
+  Button,
   Card,
   CardBody,
   Center,
@@ -68,6 +69,11 @@ export default function SignupPage() {
           </Stack>
         </CardBody>
       </Card>
+      <Center mt="10px">
+        <Button as={Link} to="/api-testing">
+          Go to api testing
+        </Button>
+      </Center>
     </Box>
   )
 }
