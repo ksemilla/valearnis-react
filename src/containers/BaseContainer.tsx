@@ -44,7 +44,7 @@ export default function BaseContainer() {
                 onClick={() => navigate("/admin/lessons")}
               />
             )}
-            <Menu>
+            <Menu placement="bottom-end">
               <MenuButton>
                 <Avatar name="John Doe" src="https://bit.ly/dan-abramov" />
               </MenuButton>
