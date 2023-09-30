@@ -201,7 +201,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/health/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/5/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
@@ -224,7 +224,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/health/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/5/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
@@ -250,7 +250,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/health/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/5/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
