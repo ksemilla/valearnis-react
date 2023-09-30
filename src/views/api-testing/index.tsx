@@ -149,26 +149,6 @@ const items: {
     },
   },
   {
-    label: "Submit a quiz: Fail",
-    description:
-      "Submit answers to quiz but one of the questions doesn't have an answer",
-    func: ApiService.post,
-    data: {
-      quiz_items: [
-        {
-          question: { id: 28, text: "test", type: "mmc" },
-          answers: [],
-        },
-      ],
-    },
-    path: `lessons/testaasd/quizzes/9/submit/`,
-    config: {
-      headers: {
-        Authorization: `Bearer ${dummyToken}`,
-      },
-    },
-  },
-  {
     label: "View quiz result list: Success",
     description: "Submit answers to quiz",
     func: ApiService.get,
@@ -222,6 +202,55 @@ const items: {
       },
     },
     path: `users`,
+  },
+  {
+    label: "Submit a quiz 1: Fail",
+    description: "One question doesnt have an answer",
+    func: ApiService.post,
+    data: {
+      quiz_items: [
+        {
+          question: { id: 15, text: "Test question 1", type: "smc" },
+          answers: [],
+        },
+        {
+          question: { id: 16, text: "Test question 2", type: "mmc" },
+          answers: [{ id: 58, text: "This is the answer 1" }],
+        },
+      ],
+    },
+    path: `lessons/testaasd/quizzes/9/submit/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${dummyToken}`,
+      },
+    },
+  },
+  {
+    label: "Submit a quiz 2: Fail",
+    description: "Single multiple choice was given more than 1 answer",
+    func: ApiService.post,
+    data: {
+      quiz_items: [
+        {
+          question: { id: 15, text: "Test question 1", type: "smc" },
+          answers: [
+            { id: 56, text: "This is the answer" },
+            { id: 57, text: "Not the answer" },
+          ],
+        },
+        {
+          question: { id: 16, text: "Test question 2", type: "mmc" },
+          answers: [{ id: 58, text: "This is the answer 1" }],
+        },
+      ],
+    },
+    path: `lessons/testaasd/quizzes/9/submit/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${dummyToken}`,
+      },
+    },
   },
 ]
 export default function ApiTesting() {
