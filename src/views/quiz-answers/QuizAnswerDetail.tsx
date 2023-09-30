@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { LessonsService } from "../../api/lessons"
-import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 import { Choice, Question } from "../../types"
 import { useQuizAnswerStore } from "../../stores/quiz"
 import { useEffect } from "react"
@@ -89,6 +89,9 @@ export default function QuizAnswerDetail() {
     <Loader text="Fetching result" />
   ) : (
     <Box maxW="600px" m="auto">
+      <Button as={Link} to="/quiz-results">
+        Back to quiz results
+      </Button>
       <Box ml={5} mb={5}>
         <Heading>{data?.quiz.name}</Heading>
         <Text fontWeight={500} fontSize="larger">
