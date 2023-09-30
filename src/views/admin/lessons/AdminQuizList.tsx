@@ -1,9 +1,11 @@
 import {
   Box,
+  Center,
   Table,
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
@@ -25,6 +27,14 @@ export default function AdminQuizList() {
 
   return isLoading ? (
     <Loader text="Fetching quizzes" />
+  ) : data?.length === 0 ? (
+    <Box mt="50px">
+      <Center>
+        <Text fontWeight={500} fontSize="3xl">
+          No quizzes yet
+        </Text>
+      </Center>
+    </Box>
   ) : (
     <Box>
       <TableContainer>
