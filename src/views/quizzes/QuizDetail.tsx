@@ -199,7 +199,13 @@ export default function QuizDetail() {
               colorScheme="blue"
               onClick={() => {
                 setIsOpen(false)
-                quizAnswerStore.reset()
+                data &&
+                  quizAnswerStore.setItems(
+                    data.questions.map((q) => ({
+                      question: q,
+                      answers: [],
+                    }))
+                  )
               }}
             >
               Retake Quiz
