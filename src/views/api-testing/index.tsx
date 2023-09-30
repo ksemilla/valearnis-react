@@ -1,44 +1,84 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react"
-import { AuthService } from "../../api"
-import { AxiosResponse } from "axios"
+import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react"
+import { AxiosRequestConfig, AxiosResponse } from "axios"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { ApiService } from "../../api/BaseService"
+
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.jWZVxYKD4dg9P8UHk6_TfbiNbMwhx-spi0ooDf0lTvc"
 
 const items: {
   label: string
   description: string
   res: boolean
-  func: (data: any) => Promise<AxiosResponse<any, any>>
+  func: (
+    path: string,
+    data: any,
+    config: AxiosRequestConfig<any>
+  ) => Promise<AxiosResponse<any, any>>
+  path: string
   data: any
+  config?: any
 }[] = [
   {
-    label: "Login Success",
+    label: "Login Success - Admin",
     description: "Api will respond with access token",
     res: true,
-    func: AuthService.login,
+    func: ApiService.post,
     data: {
       email: "admin@admin.com",
       password: "admin",
     },
+    path: `auth/`,
+    config: {},
+  },
+  {
+    label: "Login Success - User",
+    description: "Api will respond with access token",
+    res: true,
+    func: ApiService.post,
+    data: {
+      email: "test@test.com",
+      password: "test",
+    },
+    path: `auth/`,
+    config: {},
   },
   {
     label: "Login Fail 1",
     description: "Wrong password",
     res: true,
-    func: AuthService.login,
+    func: ApiService.post,
     data: {
       email: "admin@admin.com",
       password: "admin1",
     },
+    path: `auth/`,
+    config: {},
   },
   {
     label: "Login Fail 2",
     description: "Wrong email",
     res: true,
-    func: AuthService.login,
+    func: ApiService.post,
     data: {
       email: "admin1@admin.com",
       password: "admin",
+    },
+    path: `auth/`,
+    config: {},
+  },
+  {
+    label: "View lesson list Success",
+    description: "Wrong email",
+    res: true,
+    func: ApiService.get,
+    data: {},
+    path: `lessons/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
   },
 ]
@@ -46,6 +86,9 @@ export default function ApiTesting() {
   const [data, setData] = useState<any>()
   const [dataDesc, setDataDesc] = useState("")
   const [response, setResponse] = useState<any>()
+  const [statusCode, setStatusCode] = useState<number>()
+  const [detail, setDetail] = useState<any>()
+  const [viewRawResponse, setViewRawResponse] = useState(false)
 
   return (
     <Box>
@@ -71,9 +114,17 @@ export default function ApiTesting() {
                     setData(item.data)
                     setDataDesc(item.description)
                     item
-                      .func(item.data)
-                      .then((res) => setResponse(res.data))
-                      .catch((res) => setResponse(res.response))
+                      .func(item.path, item.data, item.config)
+                      .then((res) => {
+                        setResponse(res.data)
+                        setStatusCode(res.status)
+                        setDetail(res)
+                      })
+                      .catch((res) => {
+                        setResponse(res.response.data)
+                        setDetail(res.response)
+                        setStatusCode(res.response.status)
+                      })
                   }}
                 >
                   {item.label}
@@ -89,6 +140,7 @@ export default function ApiTesting() {
                 p="10px"
                 h="50%"
                 direction="column"
+                gap={1}
               >
                 <Text>Data sent</Text>
                 <Text>{dataDesc}</Text>
@@ -96,10 +148,24 @@ export default function ApiTesting() {
                   <pre>{JSON.stringify(data, null, 2)}</pre>
                 </Box>
               </Flex>
-              <Flex flex="1" p="10px" direction="column" maxH="50%">
-                <Text>Response</Text>
+              <Flex flex="1" p="10px" direction="column" maxH="50%" gap={1}>
+                <HStack>
+                  <Button size="xs" onClick={() => setViewRawResponse(false)}>
+                    View Response Detail
+                  </Button>
+                  <Button size="xs" onClick={() => setViewRawResponse(true)}>
+                    View Raw Response
+                  </Button>
+                </HStack>
                 <Box flex="1" overflow="scroll">
-                  <pre>{JSON.stringify(response, null, 2)}</pre>
+                  {!viewRawResponse ? (
+                    <Box>
+                      <Text>Status Code: {statusCode}</Text>
+                      <pre>{JSON.stringify(response, null, 2)}</pre>
+                    </Box>
+                  ) : (
+                    <pre>{JSON.stringify(detail, null, 2)}</pre>
+                  )}
                 </Box>
               </Flex>
             </Flex>
