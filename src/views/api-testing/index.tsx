@@ -129,25 +129,7 @@ const items: {
     },
     path: `lessons/health/quizzes/`,
   },
-  {
-    label: "Submit a quiz: Success",
-    description: "Submit answers to quiz",
-    func: ApiService.post,
-    data: {
-      quiz_items: [
-        {
-          question: { id: 28, text: "test", type: "mmc" },
-          answers: [{ id: 78, text: "test" }],
-        },
-      ],
-    },
-    path: `lessons/health/quizzes/9/submit/`,
-    config: {
-      headers: {
-        Authorization: `Bearer ${dummyToken}`,
-      },
-    },
-  },
+
   {
     label: "View quiz result list: Success",
     description: "Submit answers to quiz",
@@ -202,6 +184,29 @@ const items: {
       },
     },
     path: `users/`,
+  },
+  {
+    label: "Submit a quiz: Success",
+    description: "Submit answers to quiz",
+    func: ApiService.post,
+    data: {
+      quiz_items: [
+        {
+          question: { id: 15, text: "Test question 1", type: "smc" },
+          answers: [{ id: 56, text: "This is the answer" }],
+        },
+        {
+          question: { id: 16, text: "Test question 2", type: "mmc" },
+          answers: [{ id: 58, text: "This is the answer 1" }],
+        },
+      ],
+    },
+    path: `lessons/health/quizzes/9/submit/`,
+    config: {
+      headers: {
+        Authorization: `Bearer ${dummyToken}`,
+      },
+    },
   },
   {
     label: "Submit a quiz 1: Fail",

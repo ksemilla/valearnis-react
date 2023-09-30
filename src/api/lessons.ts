@@ -45,7 +45,6 @@ export class LessonsService {
       quiz_items: QuizAnswerItem[]
     }
   ) {
-    console.log("submit quiz", data, quiz_id, slug)
     return ApiService.post<QuizResult>(
       `lessons/${slug}/quizzes/${quiz_id}/submit/`,
       data
