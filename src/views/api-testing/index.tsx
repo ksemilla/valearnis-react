@@ -105,7 +105,7 @@ const items: {
         Authorization: `Bearer ${userToken}`,
       },
     },
-    path: `lessons/testaasd/`,
+    path: `lessons/health/`,
   },
   {
     label: "View lesson's quizzes as admin: Success",
@@ -116,7 +116,7 @@ const items: {
         Authorization: `Bearer ${adminToken}`,
       },
     },
-    path: `lessons/testaasd/quizzes/`,
+    path: `lessons/health/quizzes/`,
   },
   {
     label: "View lesson's quizzes as user: Fail",
@@ -127,7 +127,7 @@ const items: {
         Authorization: `Bearer ${userToken}`,
       },
     },
-    path: `lessons/testaasd/quizzes/`,
+    path: `lessons/health/quizzes/`,
   },
   {
     label: "Submit a quiz: Success",
@@ -141,7 +141,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/testaasd/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/9/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
@@ -219,7 +219,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/testaasd/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/9/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
@@ -245,7 +245,7 @@ const items: {
         },
       ],
     },
-    path: `lessons/testaasd/quizzes/9/submit/`,
+    path: `lessons/health/quizzes/9/submit/`,
     config: {
       headers: {
         Authorization: `Bearer ${dummyToken}`,
