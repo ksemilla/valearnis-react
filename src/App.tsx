@@ -45,8 +45,6 @@ function App() {
     }
   }, [])
 
-  return <RouterProvider router={router} />
-
   return loading ? (
     <Loader text="Authenticating" />
   ) : (
