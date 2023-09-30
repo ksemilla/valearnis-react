@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   HStack,
   IconButton,
@@ -34,6 +35,9 @@ export default function BaseContainer() {
               width="200px"
             />
           </Box>
+          <Button as={Link} to="/api-testing">
+            Go to api testing
+          </Button>
           <HStack align="center">
             {authStore.user?.role === UserRole.ADMIN && (
               <IconButton

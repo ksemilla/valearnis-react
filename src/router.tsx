@@ -25,6 +25,7 @@ import AuthContainer from "./containers/AuthContainer"
 import BaseContainer from "./containers/BaseContainer"
 import AdminContainer from "./containers/AdminContainer"
 import AdminQuizzesContainer from "./containers/AdminQuizzesContainer"
+import ApiTesting from "./views/api-testing"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
           </Route>
         </Route>
       </Route>
+      <Route path="/api-testing" element={<ApiTesting />} />
     </Route>
   )
 )

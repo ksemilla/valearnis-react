@@ -8,16 +8,23 @@ import {
 } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import { Credentials } from "../../types"
+import { useEffect } from "react"
 
 export default function LoginForm(props: {
   onSubmit: (data: Credentials) => void
   loading?: boolean
+  initialValues?: Credentials
 }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Credentials>()
+
+  useEffect(() => {
+    props.initialValues && reset(props.initialValues)
+  }, [props.initialValues])
 
   return (
     <form onSubmit={handleSubmit((data) => props.onSubmit(data))}>
