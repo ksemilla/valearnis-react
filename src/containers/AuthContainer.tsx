@@ -3,8 +3,6 @@ import { useAuthStore } from "../stores/auth"
 import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { UsersService } from "../api/users"
-import { Box, Center } from "@chakra-ui/react"
-import { Loader } from "../components"
 
 export default function AuthContainer() {
   const navigate = useNavigate()
@@ -25,13 +23,5 @@ export default function AuthContainer() {
     },
   })
 
-  return authStore.isLogged ? (
-    <Outlet />
-  ) : (
-    <Box mt="50px">
-      <Center>
-        <Loader text=" Unauthorized Redirecting..." />
-      </Center>
-    </Box>
-  )
+  return <Outlet />
 }
