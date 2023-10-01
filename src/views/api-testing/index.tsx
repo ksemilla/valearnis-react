@@ -297,7 +297,6 @@ export default function ApiTesting() {
                         setDetail(res)
                       })
                       .catch((res) => {
-                        console.log(res)
                         setResponse(res.response.data)
                         setDetail(res.response)
                         setStatusCode(res.response.status)
