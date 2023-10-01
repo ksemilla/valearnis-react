@@ -10,17 +10,17 @@ const adminToken = import.meta.env.VITE_ADMIN_TOKEN
 const userToken = import.meta.env.VITE_USER_TOKEN
 const dummyToken = import.meta.env.VITE_DUMMY_TOKEN
 
-const testVariables = import.meta.env.DEV
-  ? {
-      testSlug: "testaasd",
-      testUserId: 11,
-      testQuizAnswerId: 100,
-    }
-  : {
-      testSlug: "health",
-      testUserId: 4,
-      testQuizAnswerId: 4,
-    }
+// const testVariables = import.meta.env.DEV
+//   ? {
+//       testSlug: "testaasd",
+//       testUserId: 11,
+//       testQuizAnswerId: 100,
+//     }
+//   : {
+//       testSlug: "health",
+//       testUserId: 4,
+//       testQuizAnswerId: 4,
+//     }
 
 const items: {
   label: string
