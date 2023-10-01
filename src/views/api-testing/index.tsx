@@ -6,17 +6,11 @@ import { ApiService } from "../../api/BaseService"
 import { JsonView, defaultStyles } from "react-json-view-lite"
 import "react-json-view-lite/dist/index.css"
 
-// const adminToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0fQ.jWZVxYKD4dg9P8UHk6_TfbiNbMwhx-spi0ooDf0lTvc"
-// const userToken =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMH0.jzQFIVkQbIomdoyniLuJHHsQAGxaqbn0qbE9kv8f7XY"
+const adminToken = import.meta.env.VITE_ADMIN_TOKEN
+const userToken = import.meta.env.VITE_USER_TOKEN
+const dummyToken = import.meta.env.VITE_DUMMY_TOKEN
 
-const adminToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.MYpIw7_Rjj1jNwSGS4brp0oFVXCBYVfUT-pIvUqIm9M"
-const userToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyfQ.gHO35TGi4qWYaygCEz-A7edC8dsjW-Z-IKa0whst3y0"
-const dummyToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozfQ.XlBbYBYfERrZyjFCXSYIvzxveKVtaGiQLdoq9iS53GI"
+console.log(import.meta.env.DEV)
 
 const items: {
   label: string
@@ -282,6 +276,9 @@ export default function ApiTesting() {
       >
         <Flex h="100%">
           <Box p="10px" borderRight="1px" flex="1" maxW="50%">
+            <Text fontWeight={500} fontSize="2xl" mb="10px">
+              Click on the actions
+            </Text>
             <Flex gap={3} wrap="wrap">
               {items.map((item) => (
                 <Button
