@@ -55,10 +55,11 @@ export default function AdminContainer() {
               width="200px"
             />
           </Box>
-          <Button as={Link} to="/api-testing">
-            Go to api testing
-          </Button>
+
           <HStack align="center">
+            <Button as={Link} to="/api-testing" size="xs">
+              Go to api testing
+            </Button>
             {authStore.user?.role === UserRole.ADMIN && (
               <IconButton
                 aria-label="admin-link"
